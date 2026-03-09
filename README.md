@@ -1,25 +1,17 @@
-# Traof Certificates Management System | نظام تراوف لإدارة الشهادات
+# Traof Certificates Management System
 
-نظام احترافي متكامل لإدارة وإصدار الشهادات للمنظمات الخيرية ومراكز التدريب، مع دعم كامل للغة العربية والواجهات المتجاوبة.
+A professional, RTL-compatible system for managing organizations, programs, participants, and issuing/verifying certificates.
 
-## 🚀 المميزات (Features)
-- **لوحة تحكم عصرية**: إحصائيات فورية وتصميم جذاب.
-- **دعم كامل للغة العربية (RTL)**: واجهات مدروسة للمستخدم العربي.
-- **إدارة الأقسام والبرامج**: تنظيم الفعاليات التدريبية بسهولة.
-- **إصدار شهادات بالجملة**: رفع ملفات Excel لإصدار مئات الشهادات بضغطة زر.
-- **نظام التحقق**: صفحة عامة للتحقق من صحة الشهادات عبر رمز QR.
-- **تصدير بصيغة PDF**: شهادات عالية الجودة جاهزة للطباعة.
+## Structure
+- `/backend`: Node.js/Express API with MySQL, PDFKit, and ExcelJS.
+- `/frontend`: React/Vite with Tailwind CSS and Lucide icons.
 
-## 🛠️ التقنيات المستخدمة (Tech Stack)
-- **Frontend**: React + Tailwind CSS
-- **Backend**: Node.js (Express)
-- **Database**: MySQL
-
-## 📄 محتويات المشروع (Project Structure)
-- `preview_dashboard.html`: معاينة تفاعلية للنظام (يمكن فتحها مباشرة في المتصفح).
-- `schema.sql`: هيكل قاعدة البيانات MySQL.
-- `backend/`: كود الواجهة الخلفية (قيد التطوير).
-- `frontend/`: كود الواجهة الأمامية (قيد التطوير).
-
-## 📝 ملاحظة
-هذا المشروع تم إنشاؤه بواسطة **Antigravity AI** كنموذج أولي متكامل.
+## Quick Start
+1. Setup the database using `schema.sql`.
+2. Configure `.env` in the `backend` folder.
+3. Install dependencies in both folders:
+   ```bash
+   cd backend && npm install
+   cd ../frontend && npm install
+   ```
+4. Run both servers to start using the system.

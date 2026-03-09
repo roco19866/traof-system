@@ -1,4 +1,5 @@
 const db = require('../config/db');
+const ExcelJS = require('exceljs');
 
 // Get all participants
 exports.getAllParticipants = async (req, res) => {
@@ -30,8 +31,39 @@ exports.createParticipant = async (req, res) => {
     }
 };
 
-// Bulk Import (Conceptual - will integrate with exceljs)
+// Bulk Import via Excel
 exports.bulkImportParticipants = async (req, res) => {
-    // Logic for parsing Excel and inserting into DB
-    res.json({ message: 'Bulk import logic ready for integration' });
+    if (!req.file) return res.status(400).json({ message: 'Please upload an Excel file' });
+
+    try {
+        const workbook = new ExcelJS.Workbook();
+        await workbook.xlsx.load(req.file.buffer);
+        const worksheet = workbook.getWorksheet(1);
+        
+        const participants = [];
+        worksheet.eachRow((row, rowNumber) => {
+            if (rowNumber > 1) { // Skip header
+                participants.push([
+                    row.getCell(1).value, // full_name
+                    row.getCell(2).value, // national_id
+                    row.getCell(3).value, // email
+                    row.getCell(4).value, // mobile
+                    row.getCell(5).value, // gender
+                    req.body.dept_id,
+                    req.body.program_id
+                ]);
+            }
+        });
+
+        if (participants.length > 0) {
+            await db.query(
+                'INSERT INTO participants (full_name, national_id, email, mobile, gender, dept_id, program_id) VALUES ?',
+                [participants]
+            );
+        }
+
+        res.json({ message: `${participants.length} participants imported successfully` });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
 };

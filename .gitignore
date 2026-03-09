@@ -86,3 +86,11 @@ typings/
 # OS metadata
 .DS_Store
 Thumbs.db
+
+# Project specific
+backend/uploads/certificates/*
+!backend/uploads/certificates/.gitkeep
+backend/uploads/logos/*
+!backend/uploads/logos/.gitkeep
+backend/uploads/backgrounds/*
+!backend/uploads/backgrounds/.gitkeep
